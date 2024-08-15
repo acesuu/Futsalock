@@ -1,4 +1,4 @@
-﻿namespace server.Models;
+﻿namespace server.Dto;
 public class UserDto
 {
     public string Username { get; set; }

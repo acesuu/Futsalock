@@ -9,7 +9,6 @@
         public bool IsAdmin { get; set; }
         public List<Booking> Bookings { get; set; }
         public List<Review> Reviews { get; set; }
-
         public List<Ground> Grounds { get; set; }
 
     }
