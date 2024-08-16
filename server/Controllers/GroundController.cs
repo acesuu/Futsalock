@@ -80,6 +80,7 @@ namespace server.Controllers
             {
                 Name = groundDto.Name,
                 Location = groundDto.Location,
+                GoogleMap = groundDto.GoogleMap,
                 Description = groundDto.Description,
                 HourlyRate = groundDto.HourlyRate,
                 IsActive = groundDto.IsActive,
@@ -122,6 +123,7 @@ namespace server.Controllers
                 
                 existingGround.Name = groundDto.Name;
                 existingGround.Location = groundDto.Location;
+                existingGround.GoogleMap = groundDto.GoogleMap;
                 existingGround.Description = groundDto.Description;
                 existingGround.HourlyRate = groundDto.HourlyRate;
                 existingGround.IsActive = groundDto.IsActive;

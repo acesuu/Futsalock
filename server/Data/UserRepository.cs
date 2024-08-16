@@ -51,4 +51,12 @@ public class UserRepository
             return computedHash == storedHash;
         }
     }
+
+    public async Task<User> GetUserByIdAsync(int userId)
+    {
+        return await _context.Users
+            .Include(u => u.Bookings)
+            .ThenInclude(b => b.Ground)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+    }
 }

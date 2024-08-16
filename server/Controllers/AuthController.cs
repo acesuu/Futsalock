@@ -28,6 +28,7 @@ public class AuthController : ControllerBase
         {
             Username = userDto.Username,
             Email = userDto.Email,
+            Phone = userDto.Phone,
             IsAdmin = userDto.IsAdmin
         };
 
