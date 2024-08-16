@@ -78,6 +78,32 @@ namespace server.Controllers
 
             return Ok(booking);
         }
+
+        // Admin marks payment as completed, which allows marking the booking as completed
+        [Authorize(Roles = "Admin")]
+        [HttpPut("mark-payment-completed/{bookingId}")]
+        public async Task<IActionResult> MarkPaymentCompleted(int bookingId)
+        {
+            var adminId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            var booking = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            if (booking == null)
+            {
+                return NotFound("Booking not found.");
+            }
+
+            // Only the admin of the ground can mark the payment as completed
+            if (booking.Ground.AdminId != adminId)
+            {
+                return Unauthorized("You do not have permission to mark the payment for this booking.");
+            }
+
+            booking.IsPaymentCompleted = true;
+            booking.Status = "Completed";
+            await _bookingRepository.UpdateBookingAsync(booking);
+
+            return Ok(booking);
+        }
     }
 
 }
