@@ -9,7 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    //To handle circular references in JSON serialization
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+}); ;
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -44,6 +49,7 @@ builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer("name=
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<GroundRepository>();
+builder.Services.AddScoped<BookingRepository>();
 
 
 // Configure JWT Authentication
