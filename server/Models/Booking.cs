@@ -9,6 +9,7 @@
         public DateTime EndTime { get; set; }
         public decimal TotalPrice { get; set; }
         public string Status { get; set; } // [ Confirmed, Pending, Cancelled ]
+        public bool IsPaymentCompleted { get; set; }
 
         public Ground Ground { get; set; } 
         public User User { get; set; }
