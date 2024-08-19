@@ -6,5 +6,5 @@ import { GroundListComponent } from './components/ground/components/ground-list/
 export const routes: Routes = [
     { path: 'signup', component: SignUpComponent },
     { path: 'signin', component: SignInComponent },
-    { path: 'ground-list', component: GroundListComponent },
+    { path: '', component: GroundListComponent },
 ];

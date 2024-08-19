@@ -65,7 +65,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ClockSkew = TimeSpan.Zero 
         };
     });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")  // Your Angular app's address
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();  // This allows cookies and credentials to be passed
+    });
+});
 
 var app = builder.Build();
 
@@ -82,7 +91,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseCors("AllowSpecificOrigins");
+//app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
 app.Run();

@@ -13,9 +13,36 @@
         <p class="text-sm text-gray-500"><strong>Location:</strong> {{ ground.location }}</p>
         <p class="text-sm text-gray-500"><strong>Google Map:</strong> <a href="{{ ground.googleMap }}" target="_blank" class="text-blue-600 hover:underline">View Map</a></p>
         <p class="text-sm text-gray-500"><strong>Hourly Rate:</strong> {{ ground.hourlyRate }} USD</p>
-        <p class="text-sm text-center" [ngClass]="ground.isActive ? 'text-green-600' : 'text-red-600'">
-          {{ ground.isActive ? 'Active' : 'Inactive' }}
-        </p>
+        
+        <!-- Book Button -->
+        <button (click)="openModal(ground.id, ground.hourlyRate)" class="w-full bg-indigo-600 text-white py-2 px-4 mt-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          Book
+        </button>
+      </div>
+  
+      <!-- Modal for Booking Form -->
+      <div *ngIf="isModalOpen && selectedGroundId === ground.id" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+          <h2 class="text-xl font-bold mb-4">Book Ground</h2>
+          <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+              <label for="startTime" class="block text-sm font-medium text-gray-700">Start Time</label>
+              <input id="startTime" formControlName="startTime" type="datetime-local" (change)="calculateTotalPrice()" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="mb-4">
+              <label for="endTime" class="block text-sm font-medium text-gray-700">End Time</label>
+              <input id="endTime" formControlName="endTime" type="datetime-local" (change)="calculateTotalPrice()" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="mb-4">
+              <label for="totalPrice" class="block text-sm font-medium text-gray-700">Total Price</label>
+              <p class="mt-1 text-lg">{{ calculatedTotalPrice }} USD</p>
+            </div>
+            <div class="flex justify-end">
+              <button type="button" (click)="closeModal()" class="mr-4 py-2 px-4 bg-gray-600 text-white rounded-md hover:bg-gray-700">Cancel</button>
+              <button type="submit" [disabled]="bookingForm.invalid" class="py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Book Now</button>
+            </div>
+          </form>
+        </div>
       </div>
   
     </div>
