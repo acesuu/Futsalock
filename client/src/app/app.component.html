@@ -1,1 +1,24 @@
-<h1>testing</h1>
+<div class="min-h-screen flex flex-col bg-cover bg-center" style="background-image: url('signup.jpg');">
+    <header class="bg-indigo-600 text-white p-4 shadow-md">
+      <nav class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="/" class="text-xl font-bold">Your App</a>
+        <div class="flex space-x-4">
+          <a routerLink="/signin" class="hover:underline">Sign In</a>
+          <a routerLink="/signup" class="hover:underline">Sign Up</a>
+        </div>
+      </nav>
+    </header>
+  
+    <main class="flex justify-center items-center">
+      <div class="container p-6 rounded-lg ">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  
+    <footer class="bg-gray-800 text-white p-4 mt-auto">
+      <div class="max-w-7xl mx-auto text-center">
+        &copy; 2024 Your App. All rights reserved.
+      </div>
+    </footer>
+  </div>
+  
